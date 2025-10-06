@@ -36,4 +36,16 @@ export class UsersService {
   findById(id: string) {
     return this.usersRepo.findOne({ where: { id } });
   }
+
+  async update(id: string, updateData: Partial<User>) {
+    await this.usersRepo.update(id, updateData);
+    return this.findById(id);
+  }
+
+  async remove(id: string) {
+    const user = await this.findById(id);
+    if (!user) return { deleted: false, message: 'User not found' };
+    await this.usersRepo.delete(id);
+    return { deleted: true };
+  }
 }
