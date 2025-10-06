@@ -15,7 +15,7 @@ services:
   backend:
     build: ./backend
     working_dir: /app
-    command: npm run start:dev
+    command: sh -lc "npm install && npm run start:dev"
     volumes:
       - ./backend:/app
       - /app/node_modules
